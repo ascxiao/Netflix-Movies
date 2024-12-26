@@ -49,3 +49,14 @@ plt.xlabel("Rating")
 plt.ylabel("Average Rating")
 plt.title("Average Netflix Ratings by Rating Category")
 plt.show()
+
+outliers = netflix[(netflix['user_rating_score'] > netflix['user_rating_score'].quantile(0.95)) |
+                   (netflix['user_rating_score'] < netflix['user_rating_score'].quantile(0.05))]
+
+plt.scatter(netflix['release_year'], netflix['user_rating_score'], alpha=0.5)
+plt.scatter(outliers['release_year'], outliers['user_rating_score'], color='red', label='Outliers')
+plt.xlabel("Year")
+plt.ylabel("Rating")
+plt.title("Netflix Ratings Over Time with Outliers")
+plt.legend()
+plt.show()
