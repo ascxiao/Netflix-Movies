@@ -29,5 +29,23 @@ plt.xlabel("Year")
 plt.ylabel("Rating")
 plt.title ("Netflix Ratings Over Time")
 plt.legend()
+plt.show()
 
+#Average ratings by decade
+netflix['decade'] = (netflix['release_year'] // 10) * 10
+avg_ratings = netflix.groupby('decade')['user_rating_score'].mean()
+
+avg_ratings.plot(kind='bar', color='skyblue')
+plt.xlabel("Decade")
+plt.ylabel("Average Rating")
+plt.title("Average Netflix Ratings by Decade")
+plt.show()
+
+#Comparing rating level
+netflix_na = netflix.dropna()
+genres = netflix_na.groupby('rating')['user_rating_score'].mean().sort_values()
+genres.plot(kind = 'barh', figsize = (8,6), color = 'lightblue')
+plt.xlabel("Rating")
+plt.ylabel("Average Rating")
+plt.title("Average Netflix Ratings by Rating Category")
 plt.show()
