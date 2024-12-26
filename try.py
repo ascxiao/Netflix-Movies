@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import scipy.stats as sp
+import seaborn as sns
 
 #Load data
 netflix = pd.read_csv('netflix.csv')
@@ -59,4 +60,11 @@ plt.xlabel("Year")
 plt.ylabel("Rating")
 plt.title("Netflix Ratings Over Time with Outliers")
 plt.legend()
+plt.show()
+
+correlation = netflix[['release_year', 'user_rating_score']].corr()
+print(correlation)
+
+sns.heatmap(correlation, annot=True, cmap='coolwarm')
+plt.title("Correlation Between Features")
 plt.show()
